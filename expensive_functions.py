@@ -10,7 +10,6 @@ def create_matrix(n,seed):
 
     return np.array(A)
     
-
 def function_one(x,**kargs):
     total = 0
     for i in range(x):
@@ -26,5 +25,8 @@ def function_two(x,**kargs):
     A = create_matrix(x,seed)
     B = create_matrix(x,seed)
     
-    print(A.shape)
+    np.matmul(A,B)
+    return 1
+
+def function_three(x, **kargs):
     return 1

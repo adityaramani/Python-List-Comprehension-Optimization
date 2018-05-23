@@ -1,0 +1,141 @@
+Module(
+    body=[
+        FunctionDef(
+            lineno=1,
+            col_offset=0,
+            name='list_comprehension__optimized',
+            args=arguments(
+                args=[
+                    arg(lineno=2, col_offset=34, arg='expensive_func', annotation=None),
+                    arg(lineno=2, col_offset=49, arg='a', annotation=None),
+                ],
+                vararg=None,
+                kwonlyargs=[],
+                kw_defaults=[],
+                kwarg=arg(lineno=2, col_offset=53, arg='kargs', annotation=None),
+                defaults=[],
+            ),
+            body=[
+                Return(
+                    lineno=3,
+                    col_offset=4,
+                    value=ListComp(
+                        lineno=4,
+                        col_offset=8,
+                        elt=Call(
+                            lineno=4,
+                            col_offset=8,
+                            func=Name(lineno=4, col_offset=8, id='expensive_func', ctx=Load()),
+                            args=[Name(lineno=4, col_offset=23, id='x', ctx=Load())],
+                            keywords=[
+                                keyword(
+                                    arg=None,
+                                    value=Name(lineno=4, col_offset=27, id='kargs', ctx=Load()),
+                                ),
+                            ],
+                        ),
+                        generators=[
+                            comprehension(
+                                target=Name(lineno=5, col_offset=12, id='x', ctx=Store()),
+                                iter=List(
+                                    lineno=5,
+                                    col_offset=17,
+                                    elts=[Name(lineno=5, col_offset=18, id='a', ctx=Load())],
+                                    ctx=Load(),
+                                ),
+                                ifs=[
+                                    Call(
+                                        lineno=6,
+                                        col_offset=11,
+                                        func=Name(lineno=6, col_offset=11, id='expensive_func', ctx=Load()),
+                                        args=[Name(lineno=6, col_offset=26, id='x', ctx=Load())],
+                                        keywords=[
+                                            keyword(
+                                                arg=None,
+                                                value=Name(lineno=6, col_offset=30, id='kargs', ctx=Load()),
+                                            ),
+                                        ],
+                                    ),
+                                ],
+                                is_async=0,
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+            decorator_list=[Name(lineno=1, col_offset=1, id='optimize_comprehensions', ctx=Load())],
+            returns=None,
+        ),
+    ],
+)
+Modified AST
+Module(
+    body=[
+        FunctionDef(
+            lineno=1,
+            col_offset=0,
+            name='list_comprehension__optimized',
+            args=arguments(
+                args=[
+                    arg(lineno=2, col_offset=34, arg='expensive_func', annotation=None),
+                    arg(lineno=2, col_offset=49, arg='a', annotation=None),
+                ],
+                vararg=None,
+                kwonlyargs=[],
+                kw_defaults=[],
+                kwarg=arg(lineno=2, col_offset=53, arg='kargs', annotation=None),
+                defaults=[],
+            ),
+            body=[
+                Return(
+                    lineno=3,
+                    col_offset=4,
+                    value=ListComp(
+                        lineno=4,
+                        col_offset=8,
+                        elt=Name(lineno=1, col_offset=0, id='__5085828673689767763', ctx=Load()),
+                        generators=[
+                            comprehension(
+                                target=Name(lineno=5, col_offset=12, id='x__3471040762556448313', ctx=Store()),
+                                iter=List(
+                                    lineno=5,
+                                    col_offset=17,
+                                    elts=[Name(lineno=5, col_offset=18, id='a', ctx=Load())],
+                                    ctx=Load(),
+                                ),
+                                ifs=[],
+                                is_async=0,
+                            ),
+                            comprehension(
+                                target=Name(lineno=1, col_offset=0, id='__5085828673689767763', ctx=Store()),
+                                iter=List(
+                                    lineno=1,
+                                    col_offset=0,
+                                    elts=[
+                                        Call(
+                                            lineno=6,
+                                            col_offset=11,
+                                            func=Name(lineno=6, col_offset=11, id='expensive_func', ctx=Load()),
+                                            args=[Name(lineno=6, col_offset=26, id='x__3471040762556448313', ctx=Load())],
+                                            keywords=[
+                                                keyword(
+                                                    arg=None,
+                                                    value=Name(lineno=6, col_offset=30, id='kargs', ctx=Load()),
+                                                ),
+                                            ],
+                                        ),
+                                    ],
+                                    ctx=Load(),
+                                ),
+                                ifs=[Name(lineno=1, col_offset=0, id='__5085828673689767763', ctx=Load())],
+                                is_async=0,
+                            ),
+                        ],
+                    ),
+                ),
+            ],
+            decorator_list=[],
+            returns=None,
+        ),
+    ],
+)
