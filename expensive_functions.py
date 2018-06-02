@@ -1,5 +1,7 @@
 import numpy as np
 
+a = 6
+
 def create_matrix(n,seed):
     A = []
     for i in range(n):
@@ -30,3 +32,10 @@ def function_two(x,**kargs):
 
 def function_three(x, **kargs):
     return 1
+
+def function_impure(x, **kargs):
+    global a
+    a =a +  1
+    print(a)
+    return x+a
+

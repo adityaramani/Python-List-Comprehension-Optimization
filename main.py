@@ -7,12 +7,14 @@ from time import sleep
 import random
 from expensive_functions import *
 
+test1 ="test1"
+test2 ="test2"
 
 def list_comprehension(expensive_func,a,**kargs):
     return [
         expensive_func(x,**kargs)
         for x in [a]
-        if expensive_func(x,**kargs)
+        if function_two(x,**kargs)
     ]
 
 @optimize_comprehensions
@@ -20,15 +22,16 @@ def list_comprehension__optimized(expensive_func,a,**kargs):
     return [
         expensive_func(x,**kargs)
         for x in [a]
-        if expensive_func(x,**kargs)
+        if function_two(x,**kargs)
     ]
 func_times = [x for x in range(900, 1000)]
 
 opt_time =[]
 cmp_time = []
 
+expensive_func = function_impure
 
-expensive_func = function_two
+
 
 for i in func_times:
     seed = random.random()*10000

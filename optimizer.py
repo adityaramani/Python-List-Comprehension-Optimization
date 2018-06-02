@@ -7,7 +7,7 @@ from sys import maxsize
 from random import randint
 import astpretty
 
-
+environment = {}
 class DuplicateCallFinder(NodeVisitor):
 
     def __init__(self):
@@ -16,7 +16,10 @@ class DuplicateCallFinder(NodeVisitor):
     # traverse nodes and look for function calls, count no of times they are called
     def visit_Call(self, call):
         call_hash = dump(call)
+        
+        print("call hash",call_hash)
         func_call, current_count = self.calls.get(call_hash, (call, 0))
+        
         self.calls[call_hash] = (call, current_count + 1)
 
     @property
@@ -144,7 +147,9 @@ class OptimizeComprehensions(NodeTransformer):
         return '__{}'.format(abs(hash(dump(node))))
 
 
-def optimize_comprehensions(func):
+def optimize_comprehensions(func,a):
+    print("FUNC=" ,func)
+    print(a)
     source = inspect.getsource(func)
     in_node = parse(source)
     astpretty.pprint(in_node)
